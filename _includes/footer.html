@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<footer class="site-footer h-card">
+  <data class="u-url" href="{{ "/" | relative_url }}"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">{{ site.title | escape }}</h2>
+        <ul class="contact-list">
+          <li class="p-name">
+            {%- if site.author -%}
+              {{ site.author | escape }}
+            {%- endif -%}
+            </li>
+            {%- if site.email -%}
+            <li><a class="u-email" href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+            {%- endif -%}
+        </ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p>{{- site.description | escape -}}</p>
+      </div>
+      <div style="padding: 20px; font-size: 20px;" align="right">
+        <a href="https://github.com/coledie" target="_blank" rel="noopener noreferrer"><img src="/img/logo/github.jpg" alt="Github" style="width: 40px;"></a>
+        <a href="https://www.kaggle.com/coledie" target="_blank" rel="noopener noreferrer"><img src="/img/logo/kaggle.jpg" alt="Kaggle" style="width: 40px;"></a>
+      </div>
+    
+    </div>
+  
+
+      
+      
+    
+
+  
+    </div>
+</footer>

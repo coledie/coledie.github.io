@@ -1,0 +1,19 @@
+---
+layout: post
+author: Cole
+title: "Spikey: A malleable spiking neural network framework and training platform."
+permalink: Spikey
+date:   2021-04-03 1:00:00 -0500
+categories: [SNN]
+tags: [Spikey, Spiking, Neural, Network, Spiking Neural Network, SNN, Izhikevich, Florian, RL, Reinforcement, Reinforcement Learning, Learning, Deep, Deep Learning, DL, Artificial, ANN, Machine, Machine Learning, Cartpole, XOR, experiment, Numpy, Scipy, Python, Scientific, Scientific Computing, Scientific Programming, Computing, Programming, Review, Documentation]
+---
+
+Spikey is a malleable, [ndarray based](https://numpy.org/doc/stable/reference/arrays.ndarray.html) spiking neural network framework and training platform.
+Its SNN framework is built to be modified to fit a wide range of user's needs with many existing fully parameterized parts.
+The training platform is inherently parrelelizable and supports custom training loops.
+Various meta analysis tools, like a genetic algorithm, are provided to help users quickly solve for hyper-parameters in arbitrary experiments.
+Spikey is regularly tested with python 3.7-3.9 in Linux and Windows, though it is a new project so expect to post bugs or suggestions in the issues tab.
+
+[Check out Spikey, here.](https://github.com/SpikeyCNS)
+
+[More on Spiking Neural Networks, here.](https://github.com/SpikeyCNS/spikey#spiking-neural-networks)

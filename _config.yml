@@ -21,6 +21,7 @@ url: "https://coledie.com"
 
 #twitter_username: jekyllrb
 github_username:  coledie
+kaggle_username: coledie
 
 theme: minima
 plugins:

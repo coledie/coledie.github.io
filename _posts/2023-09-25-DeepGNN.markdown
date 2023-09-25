@@ -10,8 +10,8 @@ tags: [DeepGNN, GNN, Graph, Neural, Network, Graph Neural Network, Learning, Dee
 
 DeepGNN is a framework for training machine learning models on large scale graph data.
 Its main component is a Graph Sampling Engine that is actively used on internet sized graphs.
-This product supports several research and product teams within Microsoft, but since it is now open source hopefully that will expand.
 There are examples using PyTorch Geometric and Ray as frontends, but any frontend should work.
+This product supports several research and product teams within Microsoft, but since it is now open source hopefully that will expand.
 
 [Check out DeepGNN, here.](https://github.com/microsoft/DeepGNN/)
 

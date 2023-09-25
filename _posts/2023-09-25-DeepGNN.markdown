@@ -1,0 +1,18 @@
+---
+layout: post
+author: Cole
+title: "DeepGNN: Microsoft's graph neural network training platform."
+permalink: DeepGNN
+date:   2023-09-25 1:00:00 -0500
+categories: [DeepGNN]
+tags: [DeepGNN, GNN, Graph, Neural, Network, Graph Neural Network, Learning, Deep, Deep Learning, DL, Artificial, ANN, Machine, Machine Learning, GraphSAGE, experiment, Numpy, Python, PyTorch, Tensorflow, Scientific, Scientific Computing, Scientific Programming, Computing, Programming, Review, Documentation]
+---
+
+DeepGNN is a framework for training machine learning models on large scale graph data.
+Its main component is a Graph Sampling Engine that is actively used on internet sized graphs.
+This product supports several research and product teams within Microsoft, but since it is now open source hopefully that will expand.
+There are examples using PyTorch Geometric and Ray as frontends, but any frontend should work.
+
+[Check out DeepGNN, here.](https://github.com/microsoft/DeepGNN/)
+
+[See my contributions since April 2022, here.](https://github.com/microsoft/DeepGNN/pulls?q=is%3Apr+author%3Acoledie+)

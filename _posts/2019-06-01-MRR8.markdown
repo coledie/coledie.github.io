@@ -1,0 +1,17 @@
+---
+layout: post
+author: Cole
+title: "Vision for Drone Autonomy in IARC Mission 8."
+permalink: MMR8
+date:   2019-06-01 1:00:00 -0500
+categories: [MRR]
+tags: [MRR, Multirotor, Robot, Design, Team, Multirotor Robot, Design Team, IARC, Mission, Computer, Vision, Computer Vision, CV, Parallel Coordinate Embedding, Parallel Coordinate, Embedding, Python, Numpy, OpenCV, CUDA, OpenGL, GPU]
+---
+
+In the [International Aerial Robotics Competition: Mission 8](http://www.aerialroboticscompetition.org/mission8.php) the goal of the vision team was to take images of four separate pieces of a single QR code, isolate then combine them and finally read the QR code as a whole.
+In order to accomplish this, we based our approach on a paper, ["fast detection and recognition of QR codes"](https://dl.acm.org/doi/10.1145/2448531.2448548).
+Based on this paper, I implemented a linear algebra program called parallel coordinates which would identify the borders of the QR code as being the points in parralel coordinate space with the most line intersections.
+This program was written in OpenGL and runs on the GPU in order to process each image in less than a second, whereas cpu bound python code took about 10 seconds per image.
+The output of this was passed back to python where we would crop the images accordingly and permute the isolated pieces until the QR code as a whole could be read, thus solving the competition.
+
+[Mission 8 Vision Code.](https://github.com/MissouriMRR/IARC-2019/tree/develop/vision)

@@ -23,6 +23,7 @@ twitter_username: coledieckhaus
 linkedin_username: coledie
 github_username:  coledie
 kaggle_username: coledie
+huggingface_username: coledie
 
 theme: minima
 plugins:

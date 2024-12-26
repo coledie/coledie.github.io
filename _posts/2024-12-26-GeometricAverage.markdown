@@ -20,24 +20,23 @@ negative returns if we repeat it year over year, e.g. very high interest bonds.
 When we instead use the geometric average to calculate the expected returns of some bet,
 we take into account our probaility of going bust and compounding returns.
 
-For example, if we choose between two bets for which we will repeat 10 times and with the same expected return of 14%.
+For example, if we choose between two bets for which we will repeat 10 times and with the same expected value of 14%.
 ```
 Bet #1 - 9/10 chance of 10% return and a 1/10 chance of a 50% return.
 Bet #2 - Always a 14% return.
 ```
-Both bets have an expected return of 14% but the geometric averages are 3.53 and 3.70 respectively - the second option will have 5% better returns in the long term.
-We calculate this as follows, there are different ways to do so but this is simplest to just weight the repeats on the probability space since we only care about comparison here.
+Both bets have an expected return of 14% but the geometric averages show expected returns of 353% and 370% respectively - the second option will have 5% better returns over 10 years which will further compound in the long run.
+I calculate these returns just as if we cover the whole distribution space perfectly, i.e. I weigh the return as if over 10 years we hit the 9/10 chance 9 times and the 1/10 chance 1 time.
 ```
-1 - (1.1 ** 9) * 1.5
-1 - 1.14 ** 10
+Bet #1 - (1.1 ^ 9) * 1.5
+Bet #2 - 1.14 ^ 10
 ```
 
-This is decently helpful to know so we can be more precise and confident while making decisions, but using geometric
+This is helpful to know so we can be more precise and confident while making decisions, but using geometric
 average is criticial when we face chances of negative returns like the Saint Petersburg paradox.
-In the Saint Petersburg paradox we are shipping cargo with an expected return of 10% across some canal, but there is a chance
-that pirates will seize the ship netting us a -100% loss. In this example we find it is much more profitable and effective
-to insure our ships and break up the shipments into multiple ships. Even though insurance will give us a percent cost across the
-board, it takes the downside down significantly. Read more in the references.
+In the Saint Petersburg paradox we are shipping cargo with an expected return of 10% per shipment across some canal, but there is a chance that pirates will seize each ship netting us a -100% loss. In this example we find it is much more profitable and effective
+to pay the cost to insure our ships and break up the shipments between several ships. Even though insurance will give us a percentage cost across the board, it wipes out the downside and increases our
+geometric returns tremendously. Read more in the references.
 
 ## References
 

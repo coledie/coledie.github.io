@@ -22,15 +22,14 @@ we take into account our probaility of going bust and compounding returns.
 
 For example, if we choose between two bets for which we will repeat 10 times and with the same arithmetic average of 20% return on investment.
 ```
-Bet #1 - 9/10 chance of 33% return on investment and a 1/10 chance of a 2% roi - 2% removes the trailing 3's on ev calculation.
+Bet #1 - 9/10 chance of 30% return on investment and a 1/10 chance of a 70% loss.
 Bet #2 - Always a 20% return on investment.
 ```
-Both bets have an arithmetic average of 20% but the geometric averages show expected 10 year returns of 1328% and 620% respectively,
-it's not even close but we'd loose all this critical information if we only check the arithmetic average.
+Both bets have an arithmetic average of a 20% yearly return but the geometric averages show expected 10 year returns of 318% and 620% respectively, equivalent of 12% and 20% yearly returns respectively. It's not even close but we'd loose all this critical information if we only check the arithmetic average.
 
 These values are calculated as,
 ```
-Bet #1 - (1.33 ^ 9) * 1.02
+Bet #1 - (1.3 ^ 9) * .3
 Bet #2 - 1.2 ^ 10
 ```
 

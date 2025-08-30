@@ -6,4 +6,6 @@ categories: statistics
 tags: [fatbrownian, submodule, visualization, brownian, fat, thin, tail, distribution, statistics]
 ---
 
-<iframe src="/fatbrownian/index.html" width="100%" height="800" frameborder="0" scrolling="vertical" style="border: none;" title="fatbrownian demo"></iframe>
+<div style="width: 100%; height: 1500px; overflow: hidden;">
+  <iframe src="/fatbrownian/index.html" width="100%" height="1500" frameborder="0" style="border: none; margin-bottom: -20px;" title="fatbrownian demo"></iframe>
+</div>

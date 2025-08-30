@@ -1,0 +1,3 @@
+[submodule "fatbrownian"]
+	path = fatbrownian
+	url = https://github.com/coledie/fatbrownian

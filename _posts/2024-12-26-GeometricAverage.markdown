@@ -15,8 +15,8 @@ productive to just calculate the bet's expected value - which is what people usu
 In life, we need to consider whether to take some investment or career bets which affects our
 bag/wallet/portfolio repeatedly, we will make these bets again and again year after year.
 When we just use standard expected value(arithmetic average) to decide whether or not to take some bet we miss
-much information. It is possible - even likely - that we will go bust on a favorable bet that has
-negative returns if we repeat it year over year, e.g. very high interest bonds.
+much information. It is possible - even likely - that we will go bust on a favorable bet that has a potential
+for negative returns if we repeat it year over year, e.g. very high interest bonds.
 When we instead use the geometric average to calculate the expected returns of some bet,
 we take into account our probaility of going bust and compounding returns.
 

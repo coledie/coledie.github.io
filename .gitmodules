@@ -1,3 +1,6 @@
 [submodule "fatbrownian"]
 	path = fatbrownian
 	url = https://github.com/coledie/fatbrownian
+[submodule "sp500benchmark"]
+	path = sp500benchmark
+	url = https://github.com/coledie/sp500benchmark

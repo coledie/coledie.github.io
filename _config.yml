@@ -27,3 +27,6 @@ huggingface_username: coledie
 theme: minima
 plugins:
   - jekyll-feed
+
+exclude:
+  - CLAUDE.md

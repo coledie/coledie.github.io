@@ -72,25 +72,28 @@
   letter-spacing: 0.02em;
 }
 
-.badge-github {
+.badge-github,
+.badge-github:visited,
+.badge-github:hover {
   background: #24292e;
-  color: #fff;
+  color: #fff !important;
+  text-decoration: none !important;
 }
 
-.badge-kaggle {
+.badge-kaggle,
+.badge-kaggle:visited,
+.badge-kaggle:hover {
   background: #20beff;
-  color: #fff;
+  color: #fff !important;
+  text-decoration: none !important;
 }
 
-.badge-hf {
+.badge-hf,
+.badge-hf:visited,
+.badge-hf:hover {
   background: #ff9d00;
-  color: #fff;
-}
-
-.badge:hover {
-  opacity: 1;
-  text-decoration: none;
-  color: inherit;
+  color: #fff !important;
+  text-decoration: none !important;
 }
 
 /* ── Card title ── */

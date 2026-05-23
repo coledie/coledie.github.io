@@ -7,5 +7,5 @@ categories: [Complexity]
 tags: [Iterated, Function, Systems, Barnsley, Fern, Barnsley Fern, Chaos Game, Serpinski Triangle, Serpinski, Strange, Attractor, Strange Attractor, Complexity, Science, Complexity Science, Chaos, Theory, Chaos Theory, Lua]
 external_url: https://github.com/coledie/Iterated-Function-Systems
 github: True
-image: https://raw.githubusercontent.com/coledie/Iterated-Function-Systems/master/_img/Chaos-Game_Triangle.PNG
+image: https://raw.githubusercontent.com/coledie/Iterated-Function-Systems/master/_img/Iterated-Function_Fern.PNG
 ---

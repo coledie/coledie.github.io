@@ -21,10 +21,6 @@ layout: default
       {%- assign preview_img = "" -%}
       {%- if post.image -%}
         {%- assign preview_img = post.image -%}
-      {%- elsif post.github and post.external_url contains "github.com" -%}
-        {%- assign url_parts = post.external_url | split: "/" -%}
-        {%- assign repo_slug = url_parts | last -%}
-        {%- assign preview_img = "https://opengraph.github.com/repo/coledie/" | append: repo_slug -%}
       {%- else -%}
         {%- comment %} Extract first img tag from rendered HTML content %{%- endcomment -%}
         {%- assign content_split = post.content | split: '<img src="' -%}

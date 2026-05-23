@@ -10,9 +10,16 @@ layout: default
   {{ content }}
 
   {%- if site.posts.size > 0 -%}
-    <ul class="post-list">
+    <div class="list-controls">
+      <button class="filter-btn" id="filterBtn" onclick="toggleFilter()">Hide repo links</button>
+    </div>
+    <ul class="post-list" id="postList">
       {%- for post in site.posts -%}
-      <li>
+      {%- assign is_external = false -%}
+      {%- if post.github or post.kaggle or post.huggingface -%}
+        {%- assign is_external = true -%}
+      {%- endif -%}
+      <li{% if is_external %} data-external="true"{% endif %}>
         <div class="card-top">
           {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
           <span class="post-meta">{{ post.date | date: date_format }}</span>
@@ -45,3 +52,15 @@ layout: default
     </ul>
   {%- endif -%}
 </div>
+
+<script>
+  var hiding = false;
+  function toggleFilter() {
+    hiding = !hiding;
+    var list = document.getElementById('postList');
+    var btn  = document.getElementById('filterBtn');
+    list.classList.toggle('hide-external', hiding);
+    btn.classList.toggle('active', hiding);
+    btn.textContent = hiding ? 'Show all' : 'Hide repo links';
+  }
+</script>

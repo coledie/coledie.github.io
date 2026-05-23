@@ -16,11 +16,14 @@
 .header-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
 .header-inner .site-title {
   float: none;
+}
+
+.header-inner .filter-btn {
+  margin-left: auto;
 }
 
 /* ── Filter icon button ── */

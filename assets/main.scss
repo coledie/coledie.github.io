@@ -11,11 +11,19 @@
   max-width: 960px;
 }
 
-/* ── Header row ── */
+/* ── Header ── */
+
+.site-header {
+  border-top: none;
+}
 
 .header-inner {
   display: flex;
   align-items: center;
+}
+
+.header-inner::after {
+  display: none;
 }
 
 .header-inner .site-title {

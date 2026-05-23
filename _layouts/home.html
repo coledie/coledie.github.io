@@ -54,10 +54,7 @@ layout: default
   var hiding = false;
   function toggleFilter() {
     hiding = !hiding;
-    var list = document.getElementById('postList');
-    var btn  = document.getElementById('filterBtn');
-    list.classList.toggle('hide-external', hiding);
-    btn.classList.toggle('active', hiding);
-    btn.textContent = hiding ? 'Show all' : 'Hide repo links';
+    document.getElementById('postList').classList.toggle('hide-external', hiding);
+    document.getElementById('filterBtn').classList.toggle('active', hiding);
   }
 </script>

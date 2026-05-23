@@ -11,12 +11,12 @@
   max-width: 960px;
 }
 
-/* ── Header title row ── */
+/* ── Header row ── */
 
-.site-title-row {
-  display: inline-flex;
+.header-inner {
+  display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: space-between;
 }
 
 /* ── Filter icon button ── */

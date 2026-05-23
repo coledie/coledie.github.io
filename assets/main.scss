@@ -87,6 +87,12 @@
   color: #fff;
 }
 
+.badge:hover {
+  opacity: 1;
+  text-decoration: none;
+  color: inherit;
+}
+
 /* ── Card title ── */
 
 .post-list h3 {

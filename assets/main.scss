@@ -1,0 +1,131 @@
+---
+---
+
+@import "minima";
+
+/* ──────────────────────────────────────────────
+   Project cards: grid layout with tag chips
+   ────────────────────────────────────────────── */
+
+.wrapper {
+  max-width: 960px;
+}
+
+.post-list-heading {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #888;
+  margin-bottom: 1.2rem;
+  border-bottom: none;
+}
+
+.post-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 1.1rem;
+  list-style: none;
+  margin-left: 0;
+}
+
+.post-list > li {
+  background: #fff;
+  border: 1px solid #e1e4e8;
+  border-radius: 10px;
+  padding: 1.1rem 1.2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: box-shadow 0.15s ease, transform 0.12s ease;
+}
+
+.post-list > li:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.09);
+  transform: translateY(-2px);
+}
+
+/* ── Card top row ── */
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-meta {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.card-badges {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.badge {
+  font-size: 0.65rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.badge-github {
+  background: #24292e;
+  color: #fff;
+}
+
+.badge-kaggle {
+  background: #20beff;
+  color: #fff;
+}
+
+.badge-hf {
+  background: #ff9d00;
+  color: #fff;
+}
+
+/* ── Card title ── */
+
+.post-list h3 {
+  margin: 0;
+  font-size: 0.97rem;
+  line-height: 1.35;
+}
+
+.post-link {
+  color: #24292e !important;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.post-link:visited {
+  color: #444 !important;
+}
+
+.post-link:hover {
+  color: #0366d6 !important;
+  text-decoration: none;
+}
+
+/* ── Tag chips ── */
+
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.4rem;
+}
+
+.post-tag {
+  font-size: 0.65rem;
+  padding: 0.12rem 0.5rem;
+  border-radius: 20px;
+  background: #f1f8ff;
+  color: #0366d6;
+  border: 1px solid #c8e1ff;
+  text-transform: lowercase;
+  font-weight: 500;
+}

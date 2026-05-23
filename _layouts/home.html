@@ -10,9 +10,6 @@ layout: default
   {{ content }}
 
   {%- if site.posts.size > 0 -%}
-    <div class="list-controls">
-      <button class="filter-btn" id="filterBtn" onclick="toggleFilter()">Hide repo links</button>
-    </div>
     <ul class="post-list" id="postList">
       {%- for post in site.posts -%}
       {%- assign is_external = false -%}

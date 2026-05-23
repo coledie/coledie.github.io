@@ -4,6 +4,7 @@ title: "Fat vs thin tails visualization"
 date: 2025-07-19 12:00:00 -0000
 categories: statistics
 tags: [fatbrownian, submodule, visualization, brownian, fat, thin, tail, distribution, statistics]
+image: /fatbrownian/image.png
 ---
 
 <div style="width: 100%; height: 1500px; overflow: hidden;">

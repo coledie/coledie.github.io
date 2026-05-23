@@ -7,4 +7,5 @@ categories: [DL]
 tags: [Linear, Regression, Logistic, Softmax, Neural, Network, Deep, Machine, Learning, Python, PyTorch, Torch]
 external_url: https://www.kaggle.com/code/coledie/linear-regression-to-nn
 kaggle: True
+image: /assets/img/posts/nnfromlinearregressor.png
 ---

@@ -16,34 +16,68 @@ layout: default
       {%- if post.github or post.kaggle or post.huggingface -%}
         {%- assign is_external = true -%}
       {%- endif -%}
-      <li{% if is_external %} data-external="true"{% endif %}>
-        <div class="card-top">
-          {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-          <span class="post-meta">{{ post.date | date: date_format }}</span>
-          <span class="card-badges">
-            {%- if post.github -%}
-            <a href="https://github.com/coledie" target="_blank" class="badge badge-github">GitHub</a>
-            {%- endif -%}
-            {%- if post.kaggle -%}
-            <a href="https://kaggle.com/coledie" target="_blank" class="badge badge-kaggle">Kaggle</a>
-            {%- endif -%}
-            {%- if post.huggingface -%}
-            <a href="https://huggingface.co/coledie" target="_blank" class="badge badge-hf">HF</a>
-            {%- endif -%}
-          </span>
-        </div>
-        <h3>
-          <a class="post-link" href="{{ post.url | relative_url }}">
-            {{ post.title | escape }}
-          </a>
-        </h3>
-        {%- if post.tags.size > 0 -%}
-        <div class="post-tags">
-          {%- for tag in post.tags limit: 5 -%}
-          <span class="post-tag">{{ tag }}</span>
-          {%- endfor -%}
-        </div>
+
+      {%- comment %} Resolve preview image %{%- endcomment -%}
+      {%- assign preview_img = "" -%}
+      {%- if post.image -%}
+        {%- assign preview_img = post.image -%}
+      {%- elsif post.github and post.external_url contains "github.com" -%}
+        {%- assign url_parts = post.external_url | split: "/" -%}
+        {%- assign repo_slug = url_parts | last -%}
+        {%- assign preview_img = "https://opengraph.github.com/repo/coledie/" | append: repo_slug -%}
+      {%- else -%}
+        {%- comment %} Extract first img tag from rendered HTML content %{%- endcomment -%}
+        {%- assign content_split = post.content | split: '<img src="' -%}
+        {%- if content_split.size > 1 -%}
+          {%- assign img_part = content_split[1] | split: '"' | first -%}
+          {%- if img_part != "" -%}
+            {%- assign preview_img = img_part -%}
+          {%- endif -%}
         {%- endif -%}
+      {%- endif -%}
+
+      <li{% if is_external %} data-external="true"{% endif %}>
+        <a class="card-image-link" href="{{ post.url | relative_url }}">
+          {%- if preview_img != "" -%}
+          <div class="card-image">
+            <img src="{{ preview_img }}" alt="{{ post.title | escape }}" loading="lazy">
+          </div>
+          {%- else -%}
+          <div class="card-image card-image-placeholder">
+            <span class="placeholder-title">{{ post.title | escape }}</span>
+          </div>
+          {%- endif -%}
+        </a>
+
+        <div class="card-body">
+          <div class="card-top">
+            {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+            <span class="post-meta">{{ post.date | date: date_format }}</span>
+            <span class="card-badges">
+              {%- if post.github -%}
+              <a href="https://github.com/coledie" target="_blank" class="badge badge-github">GitHub</a>
+              {%- endif -%}
+              {%- if post.kaggle -%}
+              <a href="https://kaggle.com/coledie" target="_blank" class="badge badge-kaggle">Kaggle</a>
+              {%- endif -%}
+              {%- if post.huggingface -%}
+              <a href="https://huggingface.co/coledie" target="_blank" class="badge badge-hf">HF</a>
+              {%- endif -%}
+            </span>
+          </div>
+          <h3>
+            <a class="post-link" href="{{ post.url | relative_url }}">
+              {{ post.title | escape }}
+            </a>
+          </h3>
+          {%- if post.tags.size > 0 -%}
+          <div class="post-tags">
+            {%- for tag in post.tags limit: 5 -%}
+            <span class="post-tag">{{ tag }}</span>
+            {%- endfor -%}
+          </div>
+          {%- endif -%}
+        </div>
       </li>
       {%- endfor -%}
     </ul>

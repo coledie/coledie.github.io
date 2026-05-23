@@ -7,4 +7,5 @@ categories: [RL]
 tags: [Q Learning, Cartpole, TD, TD Learning, Temporal, Difference, Temporal Difference, Temporal Difference Learning, Reinforcement, Learning, Reinforcement Learning, Machine, Learning, Machine Learning, OpenAI, Gym, OpenAI Gym, Python]
 external_url: https://github.com/coledie/q-learning
 github: True
+image: /assets/img/posts/cart_pole.gif
 ---

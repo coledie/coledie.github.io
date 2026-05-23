@@ -7,4 +7,5 @@ categories: [Vision]
 tags: [Vision, Computer, Machine, Learning, Python]
 external_url: https://www.kaggle.com/coledie/intro-to-computer-vision-2
 kaggle: True
+image: /assets/img/posts/cv2.png
 ---

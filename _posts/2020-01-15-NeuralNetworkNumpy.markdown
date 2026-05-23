@@ -7,4 +7,5 @@ categories: [DL]
 tags: [Deep, Deep Learning, Machine, Learning, Machine Learning, Numpy, Pandas, Python, MNIST, MNIST Digits, Digit Classification, Classification]
 external_url: https://www.kaggle.com/coledie/neural-network-w-numpy
 kaggle: True
+image: /assets/img/posts/numpynetworks.png
 ---

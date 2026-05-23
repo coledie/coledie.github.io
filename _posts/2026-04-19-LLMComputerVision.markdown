@@ -7,4 +7,5 @@ categories: [AI]
 tags: [LLM, Computer Vision, AI, Python]
 external_url: https://github.com/coledie/LLMComputerVision
 github: True
+image: https://raw.githubusercontent.com/coledie/LLMComputerVision/main/demo.png
 ---

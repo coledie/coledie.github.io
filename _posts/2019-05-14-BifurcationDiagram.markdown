@@ -7,4 +7,5 @@ categories: [Complexity]
 tags: [Bifurcation, Diagram, Bifurcation Diagram, Logistic, Map, Logistic Map, Period Doubling Bifurcation, Period, Complexity, Science, Complexity Science, Chaos, Theory, Chaos Theory, Python]
 external_url: https://github.com/coledie/Bifurcation-Diagram
 github: True
+image: https://raw.githubusercontent.com/coledie/Bifurcation-Diagram/master/img/temperature.PNG
 ---

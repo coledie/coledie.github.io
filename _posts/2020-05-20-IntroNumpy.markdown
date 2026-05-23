@@ -7,6 +7,7 @@ categories: [Python]
 tags: [Numpy, Scipy, Python, TLDR, Summary, Explination, Crash Course, Science, Scientific, Scientific Computing, Scientific Programming, Computing, Programming, Intro, Introduction, Summary, Survey, Review, Documentation]
 external_url: https://www.kaggle.com/coledie/intro-to-numpy
 kaggle: True
+image: /assets/img/posts/intronumpy.png
 ---
 
 ---

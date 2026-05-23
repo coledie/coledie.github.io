@@ -7,4 +7,5 @@ categories: [CA]
 tags: [Cellular, Automaton, Automata, Cellular Automaton, Cellular Automata, Engine, Love2D, Lua, Lua Love2d]
 external_url: https://github.com/coledie/Cellular-Automaton-Engine
 github: True
+image: https://raw.githubusercontent.com/coledie/Cellular-Automaton-Engine/master/img/glider_gun.gif
 ---

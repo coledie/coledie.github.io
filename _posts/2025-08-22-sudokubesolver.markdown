@@ -7,4 +7,5 @@ categories: [Puzzle]
 tags: [Sudoku, Cube, 3D, Puzzle, Solver, Claude, AI, Python]
 external_url: https://github.com/coledie/sudokubesolver
 github: True
+image: /assets/img/posts/sudokube.jpg
 ---

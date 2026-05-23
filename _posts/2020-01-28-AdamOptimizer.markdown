@@ -6,6 +6,7 @@ permalink: AdamOptimizer
 date:   2020-01-28 1:00:00 -0500
 categories: [DL]
 tags: [TLDR, Summary, Explination, Crash Course, Deep, Learning, Deep Learning, Neural, Network, Networks, Neural Network, Neural Networks, Optimization, Adam, Adam Optimizer, Stochastic, Gradient, Descent, Gradient Descent, Stochastic, Stochastic Gradient Descent, Python, Numpy]
+image: /assets/img/posts/adamoptimizer.png
 ---
 Summary of the paper "Adam: A Method for Stochastic Optimization", an optimization algorithm popular for neural networks. Algorithm shown with python code.
 

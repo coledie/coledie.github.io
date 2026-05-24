@@ -7,4 +7,5 @@ categories: [Tools]
 tags: [Twitter, X, Right, Click, Context, Menu, Desktop, Plugin, Extension, Browser, Tab, Social, Media]
 external_url: https://github.com/coledie/twitterXrightclick/tree/main
 github: True
+image: /assets/img/posts/twitter.jpg
 ---

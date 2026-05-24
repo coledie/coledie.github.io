@@ -6,6 +6,7 @@ permalink: MMR8
 date:   2019-06-01 1:00:00 -0500
 categories: [MRR]
 tags: [MRR, Multirotor, Robot, Design, Team, Multirotor Robot, Design Team, IARC, Mission, Computer, Vision, Computer Vision, CV, Parallel Coordinate Embedding, Parallel Coordinate, Embedding, Python, Numpy, OpenCV, CUDA, OpenGL, GPU]
+image: /assets/img/posts/qr.png
 ---
 
 In the [International Aerial Robotics Competition: Mission 8](http://www.aerialroboticscompetition.org/mission8.php) the goal of the vision team was to take images of four separate pieces of a single QR code, isolate then combine them and finally read the QR code as a whole.

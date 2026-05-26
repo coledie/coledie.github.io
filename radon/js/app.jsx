@@ -1,4 +1,4 @@
-/* global React, ReactDOM, DuetMB, PCLines, VerticalFail, DuetPolar, VotingAccumulator, CircleHough, PlaneCylinder3D, SinogramDemo, DualityLandscape */
+/* global React, ReactDOM, DuetMB, PCLines, VerticalFail, DuetPolar, VotingAccumulator, CircleHough, PlaneCylinder3D, SinogramDemo, DualityLandscape, VoteInformation, NoiseFloor */
 
 function App() {
   return (
@@ -6,7 +6,7 @@ function App() {
       <header className="masthead">
         <div className="eyebrow">
           <span>Research notebook ‧ Hough → Radon</span>
-          <span>v 1.0 ‧ interactive ‧ 9 figures</span>
+          <span>v 1.0 ‧ interactive ‧ 11 figures</span>
         </div>
         <h1>Mathematically Detect Geometry in Images</h1>
         <p className="subtitle">
@@ -33,6 +33,8 @@ function App() {
           <li><span className="num">08</span><a href="#s8">Continuous limit: the Radon transform</a></li>
           <li><span className="num">09</span><a href="#s9">The wider duality family</a></li>
           <li><span className="num">10</span><a href="#s10">For your research</a></li>
+          <li><span className="num">11</span><a href="#s11">Hough as a communication channel</a></li>
+          <li><span className="num">12</span><a href="#s12">The Radon limit and noise floor</a></li>
         </ol>
       </nav>
 
@@ -499,6 +501,249 @@ function App() {
               intuitive instance — keep it in your head as the reference picture, and the higher-D and
               continuous versions follow from the same diagram.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── §11 Information channel ─── */}
+      <section className="sec" id="s11">
+        <div className="sec-head">
+          <div className="num">§ 11</div>
+          <h2>How many bits does <em>one vote</em> carry?</h2>
+        </div>
+        <div className="sec-body">
+          <aside className="sidenote">
+            <span className="label">Shannon framing</span>
+            The accumulator is a posterior estimator. Each edge pixel is a noisy observation. The
+            question is how many bits about θ* one pixel carries — and how many you need to beat
+            the noise floor.
+          </aside>
+          <div className="prose">
+            <p className="lede">
+              Frame the Hough transform as an information channel. The image contains a true
+              parameter vector <span className="mono">θ*</span>. Edge pixels are noisy observations.
+              Three quantities govern everything: parameter-space entropy, information per vote, and the
+              noise floor.
+            </p>
+            <p>
+              <strong>Parameter-space entropy <span className="mono">H(Θ)</span>.</strong> If Θ is
+              discretised into <span className="mono">N</span> cells, the maximum-entropy prior is{" "}
+              <span className="mono">log₂ N</span> bits — the "haystack size" you must collapse to
+              nearly zero to localise the shape. A line accumulator at 180 × 1 000 has about 17.5 bits.
+              A 5-D cylinder grid at 100 cells per axis has ~33 bits.
+            </p>
+            <p>
+              <strong>Information per vote.</strong> One edge pixel constrains <span className="mono">θ*</span> to
+              a <span className="mono">(k−1)</span>-dimensional surface inside the <span className="mono">k</span>-D
+              accumulator — the sinusoid for lines, a cone for circles. If that surface touches{" "}
+              <span className="mono">M</span> of the <span className="mono">N</span> total cells:
+            </p>
+            <div className="math">
+              I<sub>vote</sub> = log₂(N / M) = log₂ R bits — independent of k
+              <div className="annot">
+                — where R is the number of cells per axis. Each dimension adds the same haystack,
+                removes the same fraction.
+              </div>
+            </div>
+            <p>
+              This is the headline result: <strong>every vote always carries <span className="mono">log₂ R</span> bits,
+              regardless of how many parameters the shape has.</strong> So why does Hough collapse above{" "}
+              <span className="mono">k ≈ 3</span>? Because the prior entropy grows linearly in{" "}
+              <span className="mono">k</span> — <span className="mono">H(Θ) = k · log₂ R</span> — while
+              the vote-information stays flat. More dimensions means more haystack, same shovel.
+            </p>
+            <VoteInformation />
+            <p>
+              The memory penalty compounds that: adding one dimension multiplies the accumulator by{" "}
+              <span className="mono">R</span>. Drag the slider above past R = 200 and watch the cylinder
+              accumulator cross a terabyte while every bar on the left stays identical.
+            </p>
+            <h3>The noise floor and phase transition</h3>
+            <p>
+              In an image with <span className="mono">E</span> random edge pixels, each accumulator cell
+              gets <span className="mono">μ = E·M/N</span> noise votes on average. The true peak
+              collects <span className="mono">n<sub>true</sub></span> votes. Detection requires:
+            </p>
+            <div className="math">
+              n<sub>true</sub> ≫ √(E · M/N)
+              <div className="annot">— Poisson SNR</div>
+            </div>
+            <p>
+              For lines at 180 × 1 000: μ grows with E, but the <em>maximum</em> cell count across
+              all <span className="mono">N</span> cells also grows — by extreme-value statistics,
+              the best "line" a random image produces is about{" "}
+              <span className="mono">μ + σ · √(2 ln N)</span>. When your true line peak falls below
+              that false-alarm ceiling, the line is lost. The demo below makes the transition visible.
+            </p>
+            <NoiseFloor />
+            <h3>How many bits does a peak actually carry?</h3>
+            <p>
+              The noise-floor demo shows <em>when</em> a peak is detectable, but not <em>how confident</em>{" "}
+              you should be. The Gaussian/Chernoff approximation gives a clean answer. A Poisson variable
+              has variance equal to its mean λ, so a peak of height <span className="mono">n</span> sits{" "}
+              <span className="mono">(n − λ)/√λ</span> standard deviations above the background. Converting
+              to bits:
+            </p>
+            <div className="math">
+              bits ≈ (n − λ)² / (2λ ln 2)
+              <div className="annot">
+                — Gaussian/Chernoff approximation: how much evidence a peak of height n carries
+                against a Poisson background with mean λ
+              </div>
+            </div>
+            <p>
+              To be confident a line exists you need enough bits to (a) overcome the{" "}
+              <strong>multiple-testing tax</strong> — log₂ of the number of cells you searched, about 17.5
+              bits for a 180 × 1 000 accumulator — and (b) buy your desired confidence level on top of
+              that. The table shows required peak heights for two typical background levels:
+            </p>
+            <table className="tbl">
+              <thead>
+                <tr>
+                  <th>Confidence</th>
+                  <th>Bits needed</th>
+                  <th>Peak height (λ = 1)</th>
+                  <th>Peak height (λ = 10)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ['95 %',          '22', '~6',  '~20'],
+                  ['99.99 %',       '31', '~10', '~32'],
+                  ['One in a million', '38', '~12', '~38'],
+                ].map(([conf, bits, h1, h10]) => (
+                  <tr key={conf}>
+                    <td>{conf}</td>
+                    <td className="mono">{bits}</td>
+                    <td className="mono">{h1}</td>
+                    <td className="mono">{h10}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="callout">
+              <div className="callout-label">The punchline</div>
+              You need roughly 20–40 bits of evidence to be confident a line exists. About 18 of those bits
+              are just the <strong>multiple-testing tax</strong> for scanning all 180 000 possible lines —
+              unavoidable overhead that grows with accumulator size. The remaining 5–20 bits buy your actual
+              confidence level. This is why a line with only a handful of pixels above background looks
+              compelling to the eye but fails a rigorous statistical test: the visual cortex doesn't pay the
+              multiple-testing penalty.
+            </div>
+            <div className="callout">
+              <div className="callout-label">Why RANSAC wins above k ≈ 3</div>
+              The minimum number of votes needed to fully localise a <span className="mono">k</span>-parameter
+              shape equals exactly <span className="mono">k</span> — the RANSAC minimum sample size. RANSAC
+              uses precisely the minimum-information sample to instantiate a hypothesis, then verifies against
+              the data. Hough reconstructs the same information from coincident votes spread across a
+              (k−1)-D surface: efficient through k ≈ 3, wasteful from k = 4, catastrophic at k = 5.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── §12 Radon limit ─── */}
+      <section className="sec" id="s12">
+        <div className="sec-head">
+          <div className="num">§ 12</div>
+          <h2>The continuous limit: <em>Radon, Crowther, and the ramp.</em></h2>
+        </div>
+        <div className="sec-body">
+          <aside className="sidenote">
+            <span className="label">CT connection</span>
+            The Crowther criterion tells you the minimum number of CT projections needed to reconstruct
+            an object at resolution W. It is the same information bottleneck as §11, taken to the
+            continuous limit.
+          </aside>
+          <div className="prose">
+            <p className="lede">
+              Zoom all the way out: let the image be continuous and let every vote become a Dirac.
+              The accumulator becomes a function of two continuous variables — the sinogram — and
+              the information budget becomes a sampling theorem.
+            </p>
+            <p>
+              <strong>Radon as polar Fourier resampling.</strong> The Fourier slice theorem states that
+              the 1-D Fourier transform of each projection <span className="mono">R(θ, ·)</span> equals
+              one radial slice of the image's 2-D Fourier transform at angle θ:
+            </p>
+            <div className="math">
+              F<sub>ρ</sub> R(θ, ω) = f̂(ω cos θ, ω sin θ)
+              <div className="annot">
+                — the Radon transform is exactly a polar resampling of Fourier space
+              </div>
+            </div>
+            <p>
+              This immediately tells us how much data we need. If <span className="mono">f</span> is
+              band-limited to spatial frequency <span className="mono">W</span> and supported on a disk
+              of diameter <span className="mono">D</span>, its Nyquist count is ~D²W² real degrees of
+              freedom. To recover it from projections, you need at least that many independent samples
+              of the sinogram.
+            </p>
+            <p>
+              Polar Fourier coverage at radius <span className="mono">ω</span> requires angular spacing
+              at most <span className="mono">Δθ ≈ 1/(ωD)</span>. Integrating up to{" "}
+              <span className="mono">W</span> gives the <strong>Crowther criterion</strong>:
+            </p>
+            <div className="math">
+              N<sub>θ</sub> ≥ π W D / 2
+              <div className="annot">
+                — the minimum number of projections to reconstruct f at resolution W.
+                Fewer than this: a hard information bottleneck, no algorithm can compensate.
+              </div>
+            </div>
+            <p>
+              This is the sampling theorem of CT and cryo-EM. Below it you have a rank-deficient linear
+              system — missing Fourier components that no reconstruction algorithm can invent. Above it,
+              you have enough information in principle, but the problem is still ill-conditioned: inverting
+              the Radon transform amplifies frequency <span className="mono">ω</span> by{" "}
+              <span className="mono">|ω|</span>, so noise at high spatial frequencies is amplified
+              linearly. This is the continuous analogue of §11's Poisson SNR problem — and it is exactly
+              why filtered backprojection uses a ramp filter.
+            </p>
+            <h3>The unifying picture</h3>
+            <p>
+              Across discrete Hough and the continuous Radon limit, the same trade-off holds: each
+              observation carries <span className="mono">log₂ R</span> bits about the shape (or, in
+              the continuous case, one radial Fourier slice), and the prior has{" "}
+              <span className="mono">k · log₂ R</span> bits of entropy (or D²W² degrees of freedom).
+              The minimum observations needed equals <span className="mono">k</span> — the RANSAC sample
+              size — or, in CT, <span className="mono">πWD/2</span> projections.
+            </p>
+            <table className="tbl">
+              <thead>
+                <tr>
+                  <th>Shape</th><th>k</th><th>Bits / vote</th><th>H(Θ)</th><th>Min votes</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ['Line',           '2', 'log₂ R', '2·log₂ R', '2'],
+                  ['Circle / plane', '3', 'log₂ R', '3·log₂ R', '3'],
+                  ['3-D line',       '4', 'log₂ R', '4·log₂ R', '4'],
+                  ['Cylinder',       '5', 'log₂ R', '5·log₂ R', '5'],
+                ].map(([sh, k, bpv, h, mv]) => (
+                  <tr key={sh}>
+                    <td>{sh}</td><td className="mono">{k}</td>
+                    <td className="mono">{bpv}</td><td className="mono">{h}</td>
+                    <td className="mono">{mv}</td>
+                  </tr>
+                ))}
+                <tr>
+                  <td>Continuous Radon</td><td className="mono">—</td>
+                  <td className="mono">log₂(WD) / proj</td>
+                  <td className="mono">D²W² total</td>
+                  <td className="mono">πWD/2 proj</td>
+                </tr>
+              </tbody>
+            </table>
+            <div className="callout">
+              <div className="callout-label">Everything else is engineering around this budget</div>
+              Randomised Hough samples the vote-surface instead of filling it. Hierarchical Hough coarsens
+              the accumulator to survive high k. Probabilistic Hough subsamples pixels to trade recall for
+              speed. Filtered backprojection applies the ramp to undo the inversion's conditioning.
+              All of them are managing the same information budget that the Shannon-Hough analysis
+              lays bare — the Crowther criterion is just where that budget becomes a hard wall.
+            </div>
           </div>
         </div>
       </section>

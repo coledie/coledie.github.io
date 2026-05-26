@@ -1,0 +1,11 @@
+---
+layout: external
+author: Cole
+title: "Julia.cu"
+date:   2026-05-25 1:00:00 -0500
+categories: [GPU]
+tags: [Julia, CUDA, Fractal, GPU, C++]
+external_url: https://github.com/coledie/julia.cu
+github: True
+image: /assets/img/posts/julia.jpg
+---

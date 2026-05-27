@@ -1,9 +1,9 @@
 /* ── Radon Transform: research notebook explainer ── */
 
 :root {
-  --paper: #f6f2e8;
-  --paper-elev: #fbf8f0;
-  --paper-deep: #ece6d4;
+  --paper: #fdfdfd;
+  --paper-elev: #f7f7f7;
+  --paper-deep: #efefef;
   --ink: #1b1814;
   --ink-2: #3a342a;
   --ink-3: #6b6354;
@@ -40,16 +40,14 @@ body {
 
 /* ─── Paper texture: faint horizontal rule, like a notebook ─── */
 .paper-bg {
-  background-image:
-    radial-gradient(ellipse 800px 400px at 50% -100px, oklch(0.95 0.03 80 / 0.6), transparent 60%),
-    linear-gradient(var(--paper), var(--paper));
+  background-image: none;
 }
 
 /* ─── Header / masthead ─── */
 .masthead {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 64px 48px 24px;
+  padding: 16px 0 24px;
   border-bottom: 1px solid var(--rule);
 }
 .masthead .eyebrow {
@@ -94,7 +92,7 @@ body {
 .toc {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 28px 48px;
+  padding: 28px 0;
   border-bottom: 1px solid var(--rule);
   display: grid;
   grid-template-columns: 140px 1fr;
@@ -128,7 +126,7 @@ body {
 .sec {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 72px 48px;
+  padding: 72px 0;
   border-bottom: 1px solid var(--rule);
 }
 .sec-head {
@@ -418,7 +416,7 @@ body {
 .colo {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 48px;
+  padding: 48px 0;
   font-family: var(--mono);
   font-size: 11px;
   color: var(--ink-4);

@@ -4,20 +4,10 @@ function App() {
   return (
     <div className="paper-bg">
       <header className="masthead">
-        <div className="eyebrow">
-          <span>Research notebook ‧ Hough → Radon</span>
-          <span>v 1.0 ‧ interactive ‧ 11 figures</span>
-        </div>
-        <h1>Mathematically Detect Geometry in Images</h1>
         <p className="subtitle">
           A visual deep-dive: how voting in parameter space detects lines, circles and planes — and why
           the same idea, taken to its continuous limit, is what makes a CT scanner work.
         </p>
-        <div className="meta">
-          <span><span className="k">subject</span>computer vision · inverse problems</span>
-          <span><span className="k">prereq</span>linear algebra · basic calculus</span>
-          <span><span className="k">runtime</span>~ 20 min</span>
-        </div>
       </header>
 
       <nav className="toc">
@@ -31,10 +21,8 @@ function App() {
           <li><span className="num">06</span><a href="#s6">Circles — a 3-parameter Hough</a></li>
           <li><span className="num">07</span><a href="#s7">3-D Hough: planes, cylinders, n-D</a></li>
           <li><span className="num">08</span><a href="#s8">Continuous limit: the Radon transform</a></li>
-          <li><span className="num">09</span><a href="#s9">The wider duality family</a></li>
-          <li><span className="num">10</span><a href="#s10">For your research</a></li>
-          <li><span className="num">11</span><a href="#s11">Hough as a communication channel</a></li>
-          <li><span className="num">12</span><a href="#s12">The Radon limit and noise floor</a></li>
+          <li><span className="num">09</span><a href="#s11">Entropy of the Hough transform</a></li>
+          <li><span className="num">10</span><a href="#s12">Generalizing Entropy to the Limit</a></li>
         </ol>
       </nav>
 
@@ -70,7 +58,7 @@ function App() {
             </p>
             <div className="math">
               image-space line y = mx + b ⇔ parameter-space point (m, b)<br/>
-              image-space point (x₀, y₀) ⇔ parameter-space line b = −x₀·m + y₀
+              point in an image (x₀, y₀) ⇔ parameter-space line b = −x₀·m + y₀
               <div className="annot">— a point–line duality</div>
             </div>
           </div>
@@ -86,32 +74,36 @@ function App() {
         <div className="sec-body">
           <aside className="sidenote">
             <span className="label">Read it twice</span>
-            Top: an arrangement of pixels. Bottom: their parameter-space duals. The (m, b) where the
+            Top: an image. Bottom: their parameter-space duals. The (m, b) where the
             duals concentrate is the line the original pixels nearly lie on.
           </aside>
           <div className="prose">
             <p>
-              Each <span className="tk-image">image-space point</span> (top) is rewritten as a
+              Each <span className="tk-image">point in an image</span> (top) is rewritten as a
               <span className="tk-param"> line</span> (bottom) via{" "}
               <span className="mono">b = −x₀m + y₀</span>. Drag a point and its parameter line tilts and
               shifts in lockstep. Press <em>snap to collinear</em> and the parameter lines all converge on
               a single (m*, b*).
             </p>
             <DuetMB />
+            {/* PC Lines section hidden — preserved for later
             <p>
-              The same duality lives inside <strong>parallel coordinates</strong>: plot each point's
-              x value on a left axis and its y value on a right axis, then draw a line between them.
-              Collinear points in image space produce PC lines that all cross at one point in the
-              corridor between the axes — the crossing position encodes the slope. This is exactly
-              how the <a href="/MMR8" target="_blank" style={{ color: "var(--param)" }}>IARC QR pipeline</a> ran: accumulate crossings in a discretised corridor,
-              find the peak, recover the border.
+              The same duality lives inside <strong>parallel coordinates</strong>. Plot three axes —
+              <span className="mono"> y | x | −y</span> — and draw each point as a line connecting
+              its y value (left), its x value (centre), and its −y value (right). The left corridor
+              (<em>T-space</em>, y | x) captures crossings for negative slopes; the right corridor
+              (<em>S-space</em>, x | −y) captures crossings for positive slopes. Together they cover
+              all slopes without the ±∞ singularity of Cartesian (m, b). This is exactly how the{" "}
+              <a href="/MMR8" target="_blank" style={{ color: "var(--param)" }}>IARC QR pipeline</a> ran:
+              accumulate crossings in a discretised corridor, find the peak, recover the border.
             </p>
             <PCLines />
+            */}
             <p>
               The trick is now visible in two coordinate dresses: a <em>global, spatial</em> property
               in the image (scattered pixels are collinear) has become a <em>local, summable</em> event
               in parameter space (many lines crossing at one point). That swap is what makes the algorithm
-              work.
+              work - gpu parallelizable as well.
             </p>
           </div>
         </div>
@@ -132,7 +124,7 @@ function App() {
           <div className="prose">
             <p>
               Rotate a line slowly around the origin. Its slope <span className="mono">m = tan θ</span>{" "}
-              moves smoothly while θ is small and then <em>explodes</em> as θ approaches 90°. A uniform
+              moves smoothly while θ is small and then m <em>explodes</em> as θ approaches 90°. A uniform
               grid on m wastes resolution near horizontal and starves near vertical; pure verticals can’t
               be represented at all.
             </p>
@@ -309,6 +301,7 @@ function App() {
               higher-dimensional surface, so the signal-to-noise at any single cell collapses. You build
               an enormous structure to find nothing.
             </p>
+            {/* RANSAC section hidden — preserved for later
             <h3>The pivot at k ≈ 4 — RANSAC</h3>
             <p>
               The standard fix abandons the grid entirely and probes parameter space by{" "}
@@ -323,6 +316,7 @@ function App() {
               voting into it, RANSAC implicitly samples it. This is the dominant method above two
               parameters: PCL, Open3D and COLMAP all fit planes and cylinders via RANSAC, not Hough.
             </p>
+            */}
           </div>
         </div>
       </section>
@@ -391,124 +385,13 @@ function App() {
       </section>
 
       {/* ─── §9 Duality family ─── */}
-      <section className="sec" id="s9">
-        <div className="sec-head">
-          <div className="num">§ 09</div>
-          <h2>One last reframe: <em>Hough is one corner of a much bigger map.</em></h2>
-        </div>
-        <div className="sec-body">
-          <aside className="sidenote">
-            <span className="label">Unifying claim</span>
-            Data has multiple equally-valid representations; the right operation is often easy in one and
-            hard in another. Knowing which is the craft.
-          </aside>
-          <div className="prose">
-            <p>
-              The <em>switch-to-a-dual-representation</em> idea recurs across mathematics and physics
-              under different names. Each one is a kernel; each one parameterises “the right axis” for a
-              particular question.
-            </p>
-            <DualityLandscape />
-            <p>
-              <strong>Projective duality</strong> in computational geometry literally swaps points and
-              lines — convex hulls become half-plane intersections, the k-set problem and ham-sandwich
-              theorems are most naturally stated in dual form. <strong>Lifting to a paraboloid</strong>{" "}
-              sends 2-D points <span className="mono">(x, y)</span> to{" "}
-              <span className="mono">(x, y, x² + y²)</span>: take the lower convex hull in 3-D, project
-              back, and you have a Delaunay triangulation — with Voronoi diagrams as its dual.
-            </p>
-            <p>
-              The <strong>Legendre transform</strong> sends a function to its convex conjugate,
-              <span className="mono"> f*(p) = sup_x (px − f(x))</span> — swapping position-velocity space
-              for position-momentum in mechanics, swapping primal for dual in convex optimisation. The
-              <strong> Fourier transform</strong> sends time to frequency, turning convolution into
-              pointwise multiplication; in <strong>X-ray crystallography</strong> the diffraction pattern
-              <em> physically computes</em> the Fourier transform of electron density.
-            </p>
-            <p>
-              The unity is that most of these are <em>integral transforms</em> — generalised inner
-              products of the data against a parameterised family of kernels — and each is invertible
-              under appropriate conditions. Hough is the cleanest pedagogical instance. Once you have
-              the pattern in your head you start spotting it everywhere.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* ─── §9 (was §10) For your research — removed ─── */}
 
-      {/* ─── §10 For your research ─── */}
-      <section className="sec" id="s10">
-        <div className="sec-head">
-          <div className="num">§ 10</div>
-          <h2>For your research — <em>which corner are you in?</em></h2>
-        </div>
-        <div className="sec-body">
-          <aside className="sidenote">
-            <span className="label">Decision flow</span>
-            Choose your representation by the question you want to answer, not by what your data looks like.
-          </aside>
-          <div className="prose">
-            <table className="tbl">
-              <thead>
-                <tr><th>If you want to…</th><th>Representation</th><th>Practical tool</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>find lines / circles in 2-D edge maps</td>
-                  <td className="mono">(θ, ρ) / (a, b, r)</td>
-                  <td>HoughLines, HoughCircles</td>
-                </tr>
-                <tr>
-                  <td>segment 3-D point clouds into surfaces</td>
-                  <td className="mono">(θ, φ, ρ) / cylinder params</td>
-                  <td>RANSAC (PCL, Open3D)</td>
-                </tr>
-                <tr>
-                  <td>detect a custom shape from a template</td>
-                  <td className="mono">translation (× rotation × scale)</td>
-                  <td>Generalised Hough (Ballard ’81)</td>
-                </tr>
-                <tr>
-                  <td>reconstruct a density from line integrals</td>
-                  <td className="mono">sinogram → image</td>
-                  <td>filtered backprojection, iterative recon</td>
-                </tr>
-                <tr>
-                  <td>reconstruct a 3-D structure from 2-D projections of unknown orientation</td>
-                  <td className="mono">3-D X-ray transform + alignment</td>
-                  <td>RELION, cryoSPARC, ASTRA</td>
-                </tr>
-                <tr>
-                  <td>analyse periodic signals or spatial frequencies</td>
-                  <td className="mono">frequency domain</td>
-                  <td>FFT, wavelets</td>
-                </tr>
-                <tr>
-                  <td>convert constrained min/max into something tractable</td>
-                  <td className="mono">primal ↔ dual</td>
-                  <td>Lagrangian / Legendre</td>
-                </tr>
-                <tr>
-                  <td>analyse geometric incidence / range problems</td>
-                  <td className="mono">point ↔ line dual</td>
-                  <td>computational geometry libraries</td>
-                </tr>
-              </tbody>
-            </table>
-            <p style={{ marginTop: 24 }}>
-              The mental move is identical every time: <em>identify the structure you want</em>,{" "}
-              <em>write down a parameter space whose coordinates make that structure local</em>,{" "}
-              <em>project your data into it</em>, <em>find peaks</em>. Hough/Radon is the most visually
-              intuitive instance — keep it in your head as the reference picture, and the higher-D and
-              continuous versions follow from the same diagram.
-            </p>
-          </div>
-        </div>
-      </section>
 
       {/* ─── §11 Information channel ─── */}
       <section className="sec" id="s11">
         <div className="sec-head">
-          <div className="num">§ 11</div>
+          <div className="num">§ 09</div>
           <h2>How many bits does <em>one vote</em> carry?</h2>
         </div>
         <div className="sec-body">
@@ -519,21 +402,8 @@ function App() {
             the noise floor.
           </aside>
           <div className="prose">
-            <p className="lede">
-              Frame the Hough transform as an information channel. The image contains a true
-              parameter vector <span className="mono">θ*</span>. Edge pixels are noisy observations.
-              Three quantities govern everything: parameter-space entropy, information per vote, and the
-              noise floor.
-            </p>
             <p>
-              <strong>Parameter-space entropy <span className="mono">H(Θ)</span>.</strong> If Θ is
-              discretised into <span className="mono">N</span> cells, the maximum-entropy prior is{" "}
-              <span className="mono">log₂ N</span> bits — the "haystack size" you must collapse to
-              nearly zero to localise the shape. A line accumulator at 180 × 1 000 has about 17.5 bits.
-              A 5-D cylinder grid at 100 cells per axis has ~33 bits.
-            </p>
-            <p>
-              <strong>Information per vote.</strong> One edge pixel constrains <span className="mono">θ*</span> to
+              One edge pixel constrains <span className="mono">θ*</span> to
               a <span className="mono">(k−1)</span>-dimensional surface inside the <span className="mono">k</span>-D
               accumulator — the sinusoid for lines, a cone for circles. If that surface touches{" "}
               <span className="mono">M</span> of the <span className="mono">N</span> total cells:
@@ -557,23 +427,6 @@ function App() {
               The memory penalty compounds that: adding one dimension multiplies the accumulator by{" "}
               <span className="mono">R</span>. Drag the slider above past R = 200 and watch the cylinder
               accumulator cross a terabyte while every bar on the left stays identical.
-            </p>
-            <h3>The noise floor and phase transition</h3>
-            <p>
-              In an image with <span className="mono">E</span> random edge pixels, each accumulator cell
-              gets <span className="mono">μ = E·M/N</span> noise votes on average. The true peak
-              collects <span className="mono">n<sub>true</sub></span> votes. Detection requires:
-            </p>
-            <div className="math">
-              n<sub>true</sub> ≫ √(E · M/N)
-              <div className="annot">— Poisson SNR</div>
-            </div>
-            <p>
-              For lines at 180 × 1 000: μ grows with E, but the <em>maximum</em> cell count across
-              all <span className="mono">N</span> cells also grows — by extreme-value statistics,
-              the best "line" a random image produces is about{" "}
-              <span className="mono">μ + σ · √(2 ln N)</span>. When your true line peak falls below
-              that false-alarm ceiling, the line is lost. The demo below makes the transition visible.
             </p>
             <NoiseFloor />
             <h3>How many bits does a peak actually carry?</h3>
@@ -630,14 +483,6 @@ function App() {
               compelling to the eye but fails a rigorous statistical test: the visual cortex doesn't pay the
               multiple-testing penalty.
             </div>
-            <div className="callout">
-              <div className="callout-label">Why RANSAC wins above k ≈ 3</div>
-              The minimum number of votes needed to fully localise a <span className="mono">k</span>-parameter
-              shape equals exactly <span className="mono">k</span> — the RANSAC minimum sample size. RANSAC
-              uses precisely the minimum-information sample to instantiate a hypothesis, then verifies against
-              the data. Hough reconstructs the same information from coincident votes spread across a
-              (k−1)-D surface: efficient through k ≈ 3, wasteful from k = 4, catastrophic at k = 5.
-            </div>
           </div>
         </div>
       </section>
@@ -645,7 +490,7 @@ function App() {
       {/* ─── §12 Radon limit ─── */}
       <section className="sec" id="s12">
         <div className="sec-head">
-          <div className="num">§ 12</div>
+          <div className="num">§ 10</div>
           <h2>The continuous limit: <em>Radon, Crowther, and the ramp.</em></h2>
         </div>
         <div className="sec-body">
@@ -656,58 +501,11 @@ function App() {
             continuous limit.
           </aside>
           <div className="prose">
-            <p className="lede">
-              Zoom all the way out: let the image be continuous and let every vote become a Dirac.
-              The accumulator becomes a function of two continuous variables — the sinogram — and
-              the information budget becomes a sampling theorem.
-            </p>
-            <p>
-              <strong>Radon as polar Fourier resampling.</strong> The Fourier slice theorem states that
-              the 1-D Fourier transform of each projection <span className="mono">R(θ, ·)</span> equals
-              one radial slice of the image's 2-D Fourier transform at angle θ:
-            </p>
-            <div className="math">
-              F<sub>ρ</sub> R(θ, ω) = f̂(ω cos θ, ω sin θ)
-              <div className="annot">
-                — the Radon transform is exactly a polar resampling of Fourier space
-              </div>
-            </div>
-            <p>
-              This immediately tells us how much data we need. If <span className="mono">f</span> is
-              band-limited to spatial frequency <span className="mono">W</span> and supported on a disk
-              of diameter <span className="mono">D</span>, its Nyquist count is ~D²W² real degrees of
-              freedom. To recover it from projections, you need at least that many independent samples
-              of the sinogram.
-            </p>
-            <p>
-              Polar Fourier coverage at radius <span className="mono">ω</span> requires angular spacing
-              at most <span className="mono">Δθ ≈ 1/(ωD)</span>. Integrating up to{" "}
-              <span className="mono">W</span> gives the <strong>Crowther criterion</strong>:
-            </p>
-            <div className="math">
-              N<sub>θ</sub> ≥ π W D / 2
-              <div className="annot">
-                — the minimum number of projections to reconstruct f at resolution W.
-                Fewer than this: a hard information bottleneck, no algorithm can compensate.
-              </div>
-            </div>
-            <p>
-              This is the sampling theorem of CT and cryo-EM. Below it you have a rank-deficient linear
-              system — missing Fourier components that no reconstruction algorithm can invent. Above it,
-              you have enough information in principle, but the problem is still ill-conditioned: inverting
-              the Radon transform amplifies frequency <span className="mono">ω</span> by{" "}
-              <span className="mono">|ω|</span>, so noise at high spatial frequencies is amplified
-              linearly. This is the continuous analogue of §11's Poisson SNR problem — and it is exactly
-              why filtered backprojection uses a ramp filter.
-            </p>
-            <h3>The unifying picture</h3>
             <p>
               Across discrete Hough and the continuous Radon limit, the same trade-off holds: each
               observation carries <span className="mono">log₂ R</span> bits about the shape (or, in
               the continuous case, one radial Fourier slice), and the prior has{" "}
               <span className="mono">k · log₂ R</span> bits of entropy (or D²W² degrees of freedom).
-              The minimum observations needed equals <span className="mono">k</span> — the RANSAC sample
-              size — or, in CT, <span className="mono">πWD/2</span> projections.
             </p>
             <table className="tbl">
               <thead>

@@ -1,3 +1,6 @@
 [submodule "fatbrownian"]
 	path = fatbrownian
 	url = https://github.com/coledie/fatbrownian
+[submodule "sudosudosudo"]
+	path = sudosudosudo
+	url = https://github.com/coledie/sudosudosudo

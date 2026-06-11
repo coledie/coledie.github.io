@@ -4,3 +4,6 @@
 [submodule "sudosudosudo"]
 	path = sudosudosudo
 	url = https://github.com/coledie/sudosudosudo
+[submodule "magicclock"]
+	path = magicclock
+	url = https://github.com/coledie/MagicClock

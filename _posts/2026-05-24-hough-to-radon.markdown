@@ -1,7 +1,7 @@
 ---
 layout: post
 author: Cole
-title: "Mathematically Detect Geometry in Images"
+title: "How To Detect Geometry in Images"
 date: 2026-05-24 1:00:00 -0500
 categories: [Math]
 tags: [Hough, Radon, Transform, Computer Vision, Sinogram, Duality, Interactive, Math, Python, Claude Generated]

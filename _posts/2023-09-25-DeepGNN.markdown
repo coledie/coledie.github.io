@@ -6,6 +6,7 @@ permalink: DeepGNN
 date:   2023-09-25 1:00:00 -0500
 categories: [DeepGNN]
 tags: [DeepGNN, GNN, Graph, Neural, Network, Graph Neural Network, Learning, Deep, Deep Learning, DL, Artificial, ANN, Machine, Machine Learning, GraphSAGE, experiment, Numpy, Python, PyTorch, Tensorflow, Scientific, Scientific Computing, Scientific Programming, Computing, Programming, Review, Documentation]
+image: /assets/img/posts/deepgnn.png
 ---
 
 DeepGNN is a framework for training machine learning models on large scale graph data.

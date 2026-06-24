@@ -6,7 +6,7 @@ permalink: GeometricAverage
 date:   2024-12-26 1:00:00 -0500
 categories: [Statistics]
 tags: [Numpy, Scipy, Python, Statistics, Finance, Bet, Geometric, Average, Expected, Value, Options, Stock, Black, Swan, Safe, Haven, Taleb, Spitznagel, Insurance, Growth, Scientific, Scientific Computing, Scientific Programming, Computing, Programming, Review, Documentation]
-image: /assets/img/posts/betting.png
+image: /assets/img/posts/bettingodds.png
 ---
 
 # How to Calculate Betting Odds Well

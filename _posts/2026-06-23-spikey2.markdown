@@ -1,0 +1,11 @@
+---
+layout: external
+author: Cole
+title: "Promptable RL-STDP Experimentation"
+date:   2026-06-23 1:00:00 -0500
+categories: [SNN]
+tags: [Spikey, Spiking, Neural, Network, Spiking Neural Network, SNN, STDP, Spike Timing Dependent Plasticity, LLM, RL, Reinforcement, Reinforcement Learning, Learning, Deep, Deep Learning, DL, AI, Machine, Machine Learning, Python]
+external_url: https://github.com/coledie/spikey2
+github: True
+image: /assets/img/posts/spikey2.png
+---
